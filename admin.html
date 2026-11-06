@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://*.supabase.co; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <title>Private dashboard | Julianne Catuyama</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="vendor/supabase-2.119.0.js" defer></script>
+  <script src="config.js" defer></script>
+  <script src="data.js" defer></script>
+  <script src="admin.js" defer></script>
+</head>
+<body class="admin-page">
+  <header class="site-header wrap"><a class="wordmark" href="index.html">JC<span>.</span></a><a href="index.html">View portfolio ↗</a></header>
+  <main class="wrap section admin-main">
+    <p class="eyebrow">YOUR PRIVATE WORKSPACE</p>
+    <h1 class="admin-title">Portfolio <em>dashboard.</em></h1>
+    <p id="admin-status" role="status" aria-live="polite">Checking configuration…</p>
+    <section id="login-panel" class="admin-panel" hidden aria-labelledby="login-title">
+      <h2 id="login-title">Welcome back.</h2><p>Sign in with your approved admin account. Two-step verification is required.</p>
+      <form id="login-form">
+        <label>Email<input name="email" type="email" autocomplete="username" required maxlength="254"></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" required maxlength="128"></label>
+        <button class="button" type="submit">Continue →</button>
+      </form>
+    </section>
+    <section id="mfa-panel" class="admin-panel" hidden aria-labelledby="mfa-title">
+      <h2 id="mfa-title">One more step.</h2>
+      <div id="enrollment" hidden><p>In your authenticator app, add an account using this setup key. Keep it private and save a secure backup in your password manager.</p><code id="mfa-secret"></code><p>Account label: Julianne portfolio</p></div>
+      <form id="mfa-form"><label>Six-digit authenticator code<input name="code" inputmode="numeric" pattern="[0-9]{6}" autocomplete="one-time-code" required minlength="6" maxlength="6"></label><button class="button" type="submit">Verify and open dashboard →</button></form>
+    </section>
+    <button id="sign-out" type="button" class="text-button" hidden>Sign out</button>
+    <div id="dashboard" hidden>
+      <p class="dashboard-note">Your account and two-step verification protect this workspace. You’ll be signed out after 15 minutes without activity. Refreshing the page also requires signing in again.</p>
+      <section class="admin-panel" aria-labelledby="editor-title">
+        <p class="eyebrow">PUBLIC PORTFOLIO CONTENT</p><h2 id="editor-title">Make it <em>yours.</em></h2>
+        <p>Saved changes are published on your portfolio. Use accurate details and share only work you have permission to show.</p>
+        <form id="portfolio-form">
+          <label>About you<textarea name="about" required maxlength="3000" rows="5"></textarea></label>
+          <label>Public contact email<input name="email" type="email" maxlength="254"></label>
+          <label>Achievement<textarea name="achievement" maxlength="1500" rows="3"></textarea></label>
+          <fieldset><legend>Skills & services</legend><div id="edit-skills"></div><button type="button" class="text-button" data-add="skills">+ Add a skill</button></fieldset>
+          <fieldset><legend>Selected work</legend><div id="edit-projects"></div><button type="button" class="text-button" data-add="projects">+ Add a project</button></fieldset>
+          <fieldset><legend>Social & résumé links</legend><div id="edit-links"></div><button type="button" class="text-button" data-add="links">+ Add a link</button></fieldset>
+          <button type="submit" class="button">Save portfolio ↗</button>
+          <p id="save-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+      <section class="admin-panel" aria-labelledby="inquiries-title">
+        <div class="inbox-heading"><div><p class="eyebrow">PRIVATE MESSAGES</p><h2 id="inquiries-title">Your <em>inbox.</em></h2></div><button type="button" class="text-button" id="refresh-inquiries">Refresh</button></div>
+        <p>Client inquiries are visible only to your approved admin account after two-step verification. Delete messages when you no longer need them.</p>
+        <div id="inquiry-list"></div><button type="button" class="text-button" id="load-more" hidden>Load more messages</button>
+        <p id="inquiry-status" role="status" aria-live="polite"></p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
